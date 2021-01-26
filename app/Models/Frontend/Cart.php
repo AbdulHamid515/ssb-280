@@ -62,7 +62,7 @@ class Cart extends Model
     return $total_item;
 
   }
-
+// this is for 
   public static function totalPrice(){
   if (Auth::check() ) {
             $carts = Cart::where('user_is',Auth::id())->where('order_id',NULL)->get();
