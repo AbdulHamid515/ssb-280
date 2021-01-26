@@ -41,10 +41,10 @@ class CartController extends Controller
             'product_id.required'  =>'Please Choose A Product',
         ]);
         if (Auth::check() ) {
-            $cart = Cart::where('user_is',Auth::id())->where('product_id',$request->product_id)->first();
+            $cart = Cart::where('user_id',Auth::id())->where('product_id',$request->product_id)->first();
             
         }else{
-            $cart = Cart::where('ip_address',request()->ip )->where('product_id',$request->product_id)->first();
+            $cart = Cart::where('ip_address',request()->ip() )->where('product_id',$request->product_id)->first();
         }
         if (!is_null($cart) ) {
            $cart->increment('product_quantity');

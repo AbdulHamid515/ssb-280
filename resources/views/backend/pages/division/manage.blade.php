@@ -54,10 +54,10 @@
 			      	<div class="action-icons">
 			      		<ul>
 			      			<li><a href="{{ route('division.edit',$division->id)}}"><i class="fa fa-edit"></i></a></li>
-			      			<li><a href=""  data-toggle="modal" data-target="#deleteDivision"><i class="fa fa-trash"></i></a></li>
+			      			<li><a href=""  data-toggle="modal" data-target="#deleteDivision{{$division->id}}"><i class="fa fa-trash"></i></a></li>
 			      		</ul>
 			      		<!-- Delete Modal Start  -->
-			      		<div class="modal fade" id="deleteDivision" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			      		<div class="modal fade" id="deleteDivision{{$division->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 					  <div class="modal-dialog">
 					    <div class="modal-content">
 					      <div class="modal-header">
