@@ -20,6 +20,7 @@
                   <div class="control-group">
                      <ul class="categories-filter animate-dropdown">
                         <li class="dropdown">
+                           
                            <a class="dropdown-toggle"  data-toggle="dropdown" href="category.html">Categories <b class="caret"></b></a>
                            <ul class="dropdown-menu" role="menu" >
                               <li class="menu-header">Computer</li>
@@ -68,23 +69,57 @@
                </a>
                <ul class="dropdown-menu">
                   <li>
+                     @foreach (App\Models\Frontend\Cart::totalCarts() as $item)
                      <div class="cart-item product-summary">
                         <div class="row">
                            <div class="col-xs-4">
-                              <div class="image"> <a href="detail.html"><img src="{{asset('Frontend/assets/images/cart.jpg')}}" alt=""></a> </div>
+                              <div class="image"> 
+                                 <a href="detail.html">
+                                    <img src="{{asset('Backend/img/product/'. $item->product->image )}}" alt="">
+                                 </a>
+                                  </div>
                            </div>
                            <div class="col-xs-7">
-                              <h3 class="name"><a href="index8a95.html?page-detail">Simple Product</a></h3>
-                              <div class="price">$600.00</div>
+                              <h3 class="name">
+                                 <a href="index8a95.html?page-detail">{{$item->product->title}}
+                                 </a>
+                              </h3>
+                              <div class="price">
+                                 @if(!is_null($item->product->offer_price) )
+
+                                ৳{{ $item->product_quantity . 'x'. $item->product->offer_price}}BDT
+
+
+                                 @else
+                                 ৳{{$item->product_quantity . 'x'. $item->product->regular_price}}BDT
+
+                                 @endif
+
+
+                              </div>
                            </div>
-                           <div class="col-xs-1 action"> <a href="#"><i class="fa fa-trash"></i></a> </div>
+                           <div class="col-xs-1 action">
+                              <form action="{{route('cart.destroy',$item->id)}}" method="POST">
+                                @csrf 
+                              
+                            <button type="submit" ><i class="fa fa-trash"></i>
+                           </button> 
+                           </form>
+                        </div>
                         </div>
                      </div>
+                     <div  style="padding:10px 0; " class="cart-item-space">
+                        
+                     </div>
+                     @endforeach
                      <!-- /.cart-item -->
                      <div class="clearfix"></div>
                      <hr>
                      <div class="clearfix cart-total">
-                        <div class="pull-right"> <span class="text">Sub Total :</span><span class='price'>$600.00</span> </div>
+                        <div class="pull-right">
+                         <span class="text">Sub Total :</span>
+                         <span class='price'>৳{{ App\Models\Frontend\Cart::totalPrice() }}BDT</span> 
+                      </div>
                         <div class="clearfix"></div>
                         <a href="checkout.html" class="btn btn-upper btn-primary btn-block m-t-20">Checkout</a> 
                      </div>

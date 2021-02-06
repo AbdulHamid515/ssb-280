@@ -22,7 +22,8 @@ class CartController extends Controller
      */
     public function index()
     {
-        return view('frontend.pages.cart');
+        $cartItems = Cart::orderBy('id','asc')->where('order_id',NULL)->get();
+        return view('frontend.pages.cart',compact('cartItems'));
     }
 
     /**
@@ -60,8 +61,12 @@ class CartController extends Controller
             $cart->product_id         =$request->product_id;
             $cart->product_quantity   =$request->product_quantity;
             $cart->save();
+            $notification= array(
+                'massage'    => 'Item Added Successfully',
+                'alert-type' => 'success'
+            );
         }
-        return back();
+        return back()->with($notification);
     }
 
 
@@ -75,7 +80,21 @@ class CartController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $cart = Cart::find($id);
+
+        if (!is_null( $cart )){
+            $cart->product_quantity =$request->product_quantity;
+            $cart->save();
+            $notification = array(
+                'massage'    => 'Item Updated Successfully',
+                'alert-type' =>'warning'
+            );
+            return back()->with($notification);
+        } 
+        else
+        {
+            return back();
+        }
     }
 
     /**
@@ -86,6 +105,16 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
-        //
+      $cart = Cart::find($id);
+
+      if (!is_null($cart)) {
+          $cart->delete();
+           $notification= array(
+                'massage'    => 'Item Deleted Successfully',
+                'alert-type' =>'error'
+            );
+
+      }
+      return back()->with($notification);
     }
 }

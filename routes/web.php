@@ -32,9 +32,12 @@ Route::post('/update/{id}','App\Http\Controllers\Frontend\CartController@update'
 Route::post('/destroy/{id}','App\Http\Controllers\Frontend\CartController@destroy' )->name('cart.destroy');
 	
 } );
+Route::group(['prefix'=>'checkout'], function(){
+Route::get('/','App\Http\Controllers\Backend\OrderController@index' )->name('checkout.page');
 
+Route::post('/store','App\Http\Controllers\Backend\OrderController@store' )->name('order.store');
 
-
+});
 
 
 

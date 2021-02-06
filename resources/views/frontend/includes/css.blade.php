@@ -8,6 +8,7 @@
       <link rel="stylesheet" href="{{asset('Frontend/assets/css/animate.min.css')}}">
       <link rel="stylesheet" href="{{asset('Frontend/assets/css/rateit.css')}}">
       <link rel="stylesheet" href="{{asset('Frontend/assets/css/bootstrap-select.min.css')}}">
+      <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
       <!-- Icons/Glyphs -->
       <link rel="stylesheet" href="{{asset('Frontend/assets/css/font-awesome.css')}}">
       <!-- Fonts -->
